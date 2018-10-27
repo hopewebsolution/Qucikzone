@@ -103,6 +103,7 @@ public class Account_ad_details extends Activity {
     protected void onResume() {
         super.onResume();
         profilead_details(userid);
+        //
     }
 
     private void profilead_details(String userid) {
