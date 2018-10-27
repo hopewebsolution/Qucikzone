@@ -73,6 +73,7 @@ public class Account_ad_details extends Activity {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void init() {
         scroll.setNestedScrollingEnabled(true);
+        Log.d("String","NOT ACTIVE USERS");
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
