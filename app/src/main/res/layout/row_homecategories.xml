@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/Llmain"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:background="@color/colorwhite"
+    android:padding="10dp"
+    android:orientation="vertical">
+    <!-- grid items for RecyclerView   -->
+    <ImageView
+        android:id="@+id/Ivimg"
+        android:layout_width="30dp"
+        android:layout_height="25dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/placement" />
+    <TextView
+        android:id="@+id/Tvname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ABCD"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:textColor="#000" />
+</LinearLayout>

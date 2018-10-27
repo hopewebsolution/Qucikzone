@@ -1,0 +1,95 @@
+<resources>
+    <string name="app_name">Quikzon</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    //Facebook login appids
+    <string name="facebook_app_id">294918424445981</string>
+    <string name="fb_login_protocol_scheme">fb294918424445981</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_here">Search here...</string>
+    <string name="search">Search....</string>
+    <string name="item_title">1 BHK 630 Sq. ft Apartment for rent in Mansarover, Jaipur</string>
+    <string name="item_location">Mansarover, Jaipur</string>
+    <string name="item_subtitle">1 BHK | 630 sq ft</string>
+    <string name="usr_name">Salena</string>
+    <string name="item_desc">The information provided herein have been collected from publicly available sources, and is yet to be verified as per RERA guidelines.*</string>
+    <string name="login_data">Mobile/Email</string>
+    <string name="pass_data">Password</string>
+    <string name="continues">Continue</string>
+    <string name="fb">Facebook</string>
+    <string name="google">Google</string>
+    <string name="title_activity_homeactivity"></string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Chat</string>
+    <string name="title_post">Post Ad</string>
+    <string name="title_account">Account</string>
+    <string name="title_more">More</string>
+    <string name="but_now">Buy Now</string>
+    <string name="location_finder">Type your location</string>
+    <string name="current_location">Use Current Location</string>
+    <string name="select_city">Select your City</string>
+    <string name="home_data">home</string>
+    <string name="data">data</string>
+    <string name="home_ads">home_ads</string>
+    <string name="post">Post</string>
+    <string name="resetall">Reset all</string>
+    <string name="post_add">Post Add</string>
+    <string name="no_ads">No Ads</string>
+    <string name="loading_ads">Loading ads....</string>
+    <string name="loginwithpass">Login using password</string>
+    <string name="sendotp">Send OTP</string>
+    <string name="login">Login</string>
+    <string name="newsblock">Latest news</string>
+    <string name="city">city</string>
+    <string name="by_signup_agree_with_terms_amp_conditions">We will send and read the OTP to verify your number By signing up, you agree to our Terms</string>
+    <string name="empty_name">Please enter your name</string>
+    <string name="valid_mobile">Please enter your valid mobile number</string>
+    <string name="email_valid">PLease enter valid email</string>
+    <string name="pass_valid">Please enter your password</string>
+    <string name="con_pass_valid">Please enter your confirm password</string>
+    <string name="not_match">Password and Confirm password is not matched</string>
+    <string name="valida_mobile">Your number is not valid</string>
+    <string name="register">Register</string>
+    <string name="user_db">user_db</string>
+    <string name="login_db">login_db</string>
+    <string name="is_login">is_login</string>
+    <string name="guest_name">Guest</string>
+    <string name="guest_email">guest@quikzon.com</string>
+    <string name="my_ads">My ads</string>
+    <string name="my_ads_desc">Your Post ads see here...</string>
+    <string name="pass_set">Password Setting</string>
+    <string name="forgot">don\'t worry forgot password click here....</string>
+    <string name="logout">Logout</string>
+    <string name="swicth">switch account click here....</string>
+    <string name="profile">Profile Setting</string>
+    <string name="profie_desc">Need  to change profile detail click here...</string>
+    <string name="bussines_type">Select Bussiness Type</string>
+    <string name="wrong_detail"><![CDATA[Email & password Wrong]]></string>
+    <string name="required">All Filed Required !</string>
+    <string name="wron_otp">Wrong OTP</string>
+    <string name="desname">DESCRIPTION</string>
+    <string name="item_price">2,00,00</string>
+    <string name="ADDETAILS">AD DETAILS</string>
+    <string name="sellerdetails">SELLER DETAILS</string>
+    <string name="ct_qc">Contact with Quickzon chat</string>
+    <string name="makeoffchat"><![CDATA[Make offer & chat]]></string>
+    <string name="min_add">Minmium one image required for post add</string>
+    <array name="bussiness_type">
+        <item>Business Type</item>
+        <item>Retailer</item>
+        <item>Dealer</item>
+        <item>Wholesaler</item>
+        <item>Manufacture / Company</item>
+        <item>Importer</item>
+    </array>
+    <string name="title_activity_account_ad_details">Account_ad_details</string>
+    <string name="smiller">SIMILAR ADS</string>
+    <string name="delet">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="prm">PREMIUM</string>
+</resources>

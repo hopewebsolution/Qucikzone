@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#4151b0</color>
+    <color name="colorPrimaryDark">#303e9f</color>
+    <color name="colorAccent">#000000</color>
+    // here starting colors code to our app
+    <color name="colorwhite">#FFFFFF</color>
+    <color name="colorwhiteext">#A6FFFFFF</color>
+    <color name="colorblack">#000000</color>
+    <color name="colordarkgray">#A9A9A9</color>
+    <color name="colorblue">#0701EF</color>
+    <color name="colorsky">#3489B9</color>
+    <color name="coloriphone">#F9F9F9</color>
+    <color name="colorgray">#D3D3D3</color>
+    <color name="colorlimegreen">#32CD32</color>
+    <color name="colorred">#FF0000</color>
+    <color name="colorgraylight">#DDDDDD</color>
+    <color name="labelbg">#efeef3</color>
+    <color name="colorborder">#f0f0f0</color>
+    <color name="colortitle">#3f4448</color>
+    <color name="colorlightgray">#abacae</color>
+    <color name="colormainbg">#f4f4f4</color>
+    <color name="recyclerborder">#ceced0</color>
+    <color name="white_greyish">#a0a0a0</color>
+</resources>

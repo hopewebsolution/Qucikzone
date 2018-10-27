@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/source"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center|start"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+                    <ImageView
+                        android:id="@+id/Ivback"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight=".10"
+                        app:srcCompat="@drawable/ic_arrow_back"
+                        android:padding="7dp"/>
+                    <EditText
+                        android:id="@+id/Tvsearch"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight=".80"
+                        android:gravity="center|start"
+                        android:paddingLeft="20dp"
+                        android:singleLine="true"
+                        android:hint="@string/search_here"
+                        android:background="@android:color/transparent"
+                        android:textColorHint="@color/colorwhite"
+                        android:textColor="@color/colorwhite"
+                        android:textSize="14sp" />
+                    <ImageView
+                        android:id="@+id/Ivvoice"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight=".10"
+                        android:padding="@dimen/ten_dp"
+                        app:srcCompat="@drawable/ic_microphonewhite" />
+                </LinearLayout>
+        </LinearLayout>
+</LinearLayout>
