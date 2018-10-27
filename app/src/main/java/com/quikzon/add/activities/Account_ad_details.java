@@ -74,6 +74,8 @@ public class Account_ad_details extends Activity {
     private void init() {
         scroll.setNestedScrollingEnabled(true);
         Log.d("String","NOT ACTIVE USERS");
+        Log.d("String","NOT ACTIVE USERS");
+        Log.d("String","NOT ACTIVE USERS");
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
