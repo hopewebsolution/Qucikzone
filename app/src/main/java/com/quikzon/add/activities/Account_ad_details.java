@@ -98,6 +98,12 @@ public class Account_ad_details extends Activity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        profilead_details(userid);
+    }
+
     private void profilead_details(String userid) {
         progressbars.setVisibility(View.VISIBLE);
         LinkedHashMap<String, String> selad_detail = new LinkedHashMap<>();
