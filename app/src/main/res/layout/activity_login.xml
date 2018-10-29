@@ -89,7 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/ten_dp"
-            android:background="@color/colorblack"
+            android:background="@color/colorPrimary"
             android:text="@string/continues"
             android:textColor="@color/colorwhite" />
 
@@ -98,7 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/ten_dp"
-            android:background="@color/colorblack"
+            android:background="@color/colorPrimary"
             android:text="@string/login"
             android:textColor="@color/colorwhite"
             android:visibility="gone" />
@@ -108,8 +108,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/ten_dp"
-            android:background="@color/colorblack"
-            android:text="@string/sendotp"
+            android:background="@color/colorPrimary"
+            android:text="@string/continues"
             android:textColor="@color/colorwhite"
             android:visibility="gone" />
     </LinearLayout>

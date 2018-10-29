@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         app:cardElevation="3dp">
-
         <LinearLayout
             android:id="@+id/Llitems"
             android:layout_width="match_parent"
@@ -27,7 +26,7 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/img_scroll"
                     android:overScrollMode="never"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/one_thirty_dp"
                     android:background="@color/colorwhite"/>
                 <TextView
