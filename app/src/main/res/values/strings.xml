@@ -92,4 +92,5 @@
     <string name="delet">Delete</string>
     <string name="edit">Edit</string>
     <string name="prm">PREMIUM</string>
+    <string name="chat_user">chat_user</string>
 </resources>

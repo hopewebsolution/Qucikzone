@@ -74,8 +74,6 @@ public class Account_ad_details extends Activity {
     private void init() {
         scroll.setNestedScrollingEnabled(true);
         Log.d("String","NOT ACTIVE USERS");
-        Log.d("String","NOT ACTIVE USERS");
-        Log.d("String","NOT ACTIVE USERS");
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,7 +92,6 @@ public class Account_ad_details extends Activity {
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
-                //dfdfdfdf
             }
         }
     }
@@ -103,7 +100,7 @@ public class Account_ad_details extends Activity {
     protected void onResume() {
         super.onResume();
         profilead_details(userid);
-        //
+
     }
 
     private void profilead_details(String userid) {

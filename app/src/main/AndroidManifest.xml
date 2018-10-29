@@ -113,9 +113,12 @@
         <activity
             android:name=".activities.Account_ad_details"
             android:label="@string/title_activity_account_ad_details" />
-        <activity android:name=".activities.Full_screen_img"
+        <activity
+            android:name=".activities.Full_screen_img"
             android:configChanges="orientation|screenSize"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.Chat_user" />
+        <activity android:name=".activities.Messagner"></activity>
     </application>
 
 </manifest>

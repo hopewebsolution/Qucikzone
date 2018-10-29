@@ -199,7 +199,7 @@ public class Homefragement extends Fragment implements View.OnClickListener {
                         //ads adpater
                         parents = Utility.gson.fromJson(obj.getJSONObject("data").getJSONArray("home_blocks").toString(), new TypeToken<List<Products>>() {
                         }.getType());
-                        rVparent.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, true));
+                            rVparent.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, true));
                         Homeparentcategoires homeparentcategoires = new Homeparentcategoires(getActivity(), parents);
                         rVparent.setAdapter(homeparentcategoires);
                         // news adapter blog

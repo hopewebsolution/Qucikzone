@@ -7,6 +7,8 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,6 +32,7 @@ import com.quikzon.add.adapters.Item_description;
 import com.quikzon.add.adapters.Sub_catgory;
 import com.quikzon.add.adapters.VIew_all_adapter;
 import com.quikzon.add.helper.EqualSpacingItemDecoration;
+import com.quikzon.add.model.Chat_list;
 import com.quikzon.add.model.Item_descritiption;
 import com.quikzon.add.model.News_blog;
 import com.quikzon.add.model.Product_attrubuts;
@@ -98,6 +101,7 @@ public class Items_details extends AppCompatActivity implements View.OnClickList
     String author_name = "";
     String author_id = "";
     String author_type= "";
+    String ad_title= "";
     Sub_catgory sub_catgory;
     ArrayList<Product_attrubuts> smiler_ads=new ArrayList<>();
     /*   TextView no_ads;*/
@@ -108,6 +112,7 @@ public class Items_details extends AppCompatActivity implements View.OnClickList
     ;
     Gson gson;
     String all_imgs="";
+    FragmentTransaction fragmentTransaction;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,6 +131,7 @@ public class Items_details extends AppCompatActivity implements View.OnClickList
         Llprofiledata.setOnClickListener(this);
         Llcallnow.setOnClickListener(this);
         layoutTop.setOnClickListener(this);
+        Llchat.setOnClickListener(this);
 
     }
 
@@ -162,6 +168,7 @@ public class Items_details extends AppCompatActivity implements View.OnClickList
                             JSONObject add_details = obj.getJSONObject("data");
                             author_id=add_details.getString("ad_author_id");
                             Tvdescrip.setText(add_details.getString("ad_title"));
+                            ad_title=add_details.getString("ad_title");
                             Tvdescr.setText(add_details.getString("ad_desc"));
                             Tvprice.setText(add_details.getString("ad_price"));
                             Tvcondition.setText(add_details.getString("ad_condition"));
@@ -234,6 +241,73 @@ public class Items_details extends AppCompatActivity implements View.OnClickList
                 intent.putExtra("imgs",all_imgs);
                 startActivity(intent);
                 break;
+            case R.id.Llchat:
+                if (Utility.get_login(this)) {
+                    //to add user
+                    ad_user(ad_id,author_id,author_name,ad_title);
+                } else {
+                    Intent i = new Intent(this, Login.class);
+                    startActivityForResult(i, Utility.login);
+                }
+                break;
         }
+    }
+
+    private void ad_user(String ad_id,String author_id,String author_name,String ad_title) {
+        ArrayList<Chat_list> user=Utility.get_chat_user(this);
+        if(user!=null)
+        {
+            boolean is_already=false;
+            for (int i = 0; i < user.size(); i++) {
+                if (user.get(i).getAd_id().equalsIgnoreCase(ad_id) && user.get(i).getAuthor_id().equalsIgnoreCase(author_id)) {
+                    is_already = true;
+                    break;
+                }
+
+            }
+            if(!is_already)
+            {
+                Chat_list chat_list=new Chat_list();
+                chat_list.setAd_id(ad_id);
+                chat_list.setAuthor_id(author_id);
+                chat_list.setAuthor_name(author_name);
+                chat_list.setAd_title(ad_title);
+                user.add(chat_list);
+                Utility.set_chat_user(this,gson.toJson(user));
+                start_fragment(new Chat_user());
+
+            }
+            else
+            {
+                Chat_list chat_list=new Chat_list();
+                chat_list.setAd_id(ad_id);
+                chat_list.setAuthor_id(author_id);
+                chat_list.setAuthor_name(author_name);
+                chat_list.setAd_title(ad_title);
+                user.add(chat_list);
+                Utility.set_chat_user(this,gson.toJson(user));
+                start_fragment(new Chat_user());
+            }
+        }
+        else
+        {
+            user=new ArrayList<>();
+            Chat_list chat_list=new Chat_list();
+            chat_list.setAd_id(ad_id);
+            chat_list.setAuthor_id(author_id);
+            chat_list.setAuthor_name(author_name);
+            chat_list.setAd_title(ad_title);
+            user.add(chat_list);
+            Utility.set_chat_user(this,gson.toJson(user));
+            start_fragment(new Chat_user());
+        }
+
+    }
+
+    private void start_fragment(Fragment fragment)
+    {
+        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.commit();
     }
 }

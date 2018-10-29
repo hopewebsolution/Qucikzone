@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.quikzon.add.activities.Chat_user;
 import com.quikzon.add.activities.City_selector;
 import com.quikzon.add.activities.Login;
 import com.quikzon.add.fragements.Account_fragement;
@@ -80,7 +81,14 @@ public class Homeactivity extends AppCompatActivity implements BottomNavigationV
                 account_header.setVisibility(View.GONE);
                 return true;
             case R.id.navigation_chat:
-                start_fragment(new Chat_fragement());
+                if(Utility.get_login(this)) {
+                    start_fragment(new Chat_user());
+                }
+                else
+                {
+                    Intent i = new Intent(this, Login.class);
+                    startActivityForResult(i, Utility.login);
+                }
                 return true;
             case R.id.navigation_post:
                 if(Utility.get_login(this)) {

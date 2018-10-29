@@ -44,6 +44,9 @@ dependencies {
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.15'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     implementation 'com.fxn769:pix:1.2.5'
+    compile('com.github.nkzawa:socket.io-client:0.5.0') {
+        exclude group: 'org.json', module: 'json'
+    }
 
     // dexter runtime permissions
     implementation 'id.zelory:compressor:2.1.0'

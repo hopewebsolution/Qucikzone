@@ -26,11 +26,14 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.github.nkzawa.socketio.client.IO;
+import com.github.nkzawa.socketio.client.Socket;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.quikzon.add.Homeactivity;
 import com.quikzon.add.R;
 import com.quikzon.add.model.Account_model;
+import com.quikzon.add.model.Chat_list;
 import com.quikzon.add.model.Super_cat;
 import com.quikzon.add.restapi.Apiconfig;
 import com.squareup.picasso.Picasso;
@@ -38,6 +41,7 @@ import com.squareup.picasso.Picasso;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -68,6 +72,7 @@ public class Utility {
     static Context contexts;
     //db variables
     protected static final int REQUEST_CHECK_SETTINGS = 0x1;
+    public static Socket socket;
     private static SharedPreferences local_db;
     private static SharedPreferences.Editor tbl_user;
     public static Gson gson = new Gson();
@@ -424,4 +429,30 @@ public class Utility {
         activity.startActivity(new Intent(activity, Homeactivity.class));
         activity.finishAffinity();
     }
+    //to set user is login
+    public static void set_chat_user(Activity activity, String chats) {
+        local_db = activity.getSharedPreferences(activity.getString(R.string.chat_user), Context.MODE_PRIVATE);
+        tbl_user = local_db.edit();
+        tbl_user.putString("chat_list",chats);
+        tbl_user.apply();
+    }
+
+    public static ArrayList<Chat_list> get_chat_user(Activity activity) {
+        local_db = activity.getSharedPreferences(activity.getString(R.string.chat_user), Context.MODE_PRIVATE);
+        return Utility.gson.fromJson(local_db.getString("chat_list",""), new TypeToken<List<Chat_list>>() {
+        }.getType());
+    }
+
+    public static void join_chat(Activity activity,String name)
+    {
+        //connect you socket client to the server
+        try {
+            socket = IO.socket("http://hopewebsolution.com:3000");
+            socket.connect();
+            socket.emit("join", name);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

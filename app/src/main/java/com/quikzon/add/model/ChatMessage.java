@@ -6,7 +6,14 @@ public class ChatMessage {
     private String body, sender, receiver;
     private boolean isMine;
     private String date;
-    private String image;
+
+    public boolean isMine() {
+        return isMine;
+    }
+
+    public void setMine(boolean mine) {
+        isMine = mine;
+    }
 
     public String getBody() {
         return body;
@@ -32,27 +39,11 @@ public class ChatMessage {
         this.receiver = receiver;
     }
 
-    public boolean isMine() {
-        return isMine;
-    }
-
-    public void setMine(boolean mine) {
-        isMine = mine;
-    }
-
     public String getDate() {
         return date;
     }
 
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 }
