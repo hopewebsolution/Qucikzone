@@ -190,6 +190,9 @@ public class Messagner extends AppCompatActivity implements View.OnClickListener
         });
 
 
+
+
+
         socket.on("message", new Emitter.Listener() {
             @Override
             public void call(final Object... args) {
