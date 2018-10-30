@@ -120,7 +120,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         Chk.setOnClickListener(this);
         Btnsendotp.setOnClickListener(this);
         Btnlogins.setOnClickListener(this);
-        email.setHint("Email");
+        email.setHint("Enter Mobile Number/ Email");
+
 
         email.addTextChangedListener(new TextWatcher() {
             @Override

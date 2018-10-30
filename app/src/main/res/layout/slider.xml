@@ -8,6 +8,5 @@
         android:layout_height="fill_parent"
         android:adjustViewBounds="true"
         android:layout_gravity="center"
-        android:src="@drawable/first"
-        android:scaleType="centerCrop"/>
+        android:src="@drawable/first"/>
 </FrameLayout>

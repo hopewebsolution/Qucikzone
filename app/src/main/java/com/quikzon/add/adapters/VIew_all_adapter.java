@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.quikzon.add.R;
 import com.quikzon.add.activities.Items_details;
@@ -24,7 +25,7 @@ import com.quikzon.add.utility.Utility;
 
 import java.util.ArrayList;
 
-public class VIew_all_adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class VIew_all_adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
     ArrayList<Product_attrubuts> personNames;
     Context context;
     Rv_adapter_viewall slider;
@@ -56,7 +57,9 @@ public class VIew_all_adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         ((MyViewHolder)viewHolder).img_scroll.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
          slider = new Rv_adapter_viewall(context, personNames.get(position).getAd_images());
         ((MyViewHolder)viewHolder).img_scroll.setAdapter(slider);
-        ((MyViewHolder)viewHolder).img_scroll.setOnClickListener(new View.OnClickListener() {
+        ((MyViewHolder)viewHolder).img_scroll.setClickable(false);
+        ((MyViewHolder)viewHolder).img_scroll.setOnClickListener(this);
+/*        ((MyViewHolder)viewHolder).img_scroll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, Items_details.class);
@@ -64,8 +67,8 @@ public class VIew_all_adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 intent.putExtra("ad_id",personNames.get(position).getAd_id());
                 context.startActivity(intent);
             }
-        });
-        ((MyViewHolder)viewHolder).itemView.setOnClickListener(new View.OnClickListener() {
+        });*/
+        ((MyViewHolder)viewHolder).Llitems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, Items_details.class);
@@ -81,12 +84,18 @@ public class VIew_all_adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         return personNames.size();
     }
 
+    @Override
+    public void onClick(View v) {
+        Toast.makeText(context,"sdfss",Toast.LENGTH_LONG).show();
+
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         // init the item view's
         TextView Tvdescription,Tvaddress,Tvprice,Tvcondition,Tvtxtfiled;
         RecyclerView img_scroll;
         Button Btbut_now;
-        LinearLayout mainLl;
+        LinearLayout Llitems;
         public MyViewHolder(View itemView) {
             super(itemView);
             // get the reference of item view's
@@ -96,7 +105,7 @@ public class VIew_all_adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             Tvprice = (TextView) itemView.findViewById(R.id.Tvprice);
             Tvtxtfiled = (TextView) itemView.findViewById(R.id.Tvtxtfiled);
             Btbut_now = (Button) itemView.findViewById(R.id.Btbut_now);
-            mainLl = (LinearLayout) itemView.findViewById(R.id.mainLl);
+            Llitems = (LinearLayout) itemView.findViewById(R.id.Llitems);
             img_scroll = (RecyclerView) itemView.findViewById(R.id.img_scroll);
         }
     }
