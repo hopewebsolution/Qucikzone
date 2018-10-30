@@ -27,6 +27,36 @@
         android:text="@string/no_ads"
         android:gravity="center"
         android:visibility="gone"/>
+        <LinearLayout
+            android:id="@+id/Lllayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="wrap_content"
+                android:layout_marginTop="160dp"
+                android:layout_height="100dp"
+                android:src="@drawable/funnel"
+                android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:padding="@dimen/five_dp"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/colorblack"
+                android:text="@string/oopss"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:padding="@dimen/five_dp"
+                android:layout_gravity="center"
+                android:textColor="@color/colordarkgray"
+                android:text="@string/oopss_des"/>
+        </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

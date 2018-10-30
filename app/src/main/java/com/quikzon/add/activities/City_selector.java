@@ -28,6 +28,7 @@ import com.quikzon.add.MainActivity;
 import com.quikzon.add.R;
 import com.quikzon.add.adapters.City_adpater;
 import com.quikzon.add.model.City_model;
+import com.quikzon.add.services.GPSTracker;
 import com.quikzon.add.services.MyLocationService;
 import com.quikzon.add.utility.Utility;
 
@@ -49,11 +50,6 @@ public class City_selector extends AppCompatActivity implements View.OnClickList
     EditText serach;
     MyLocationService locationService;
     ArrayList<City_model> list = new ArrayList<>();
-    private static final int REQUEST_CODE_PERMISSION = 2;
-    LocationManager locationManager;
-    String mPermission = Manifest.permission.ACCESS_FINE_LOCATION;
-    double longitude=0.0;
-    double latitude=0.0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,7 +82,6 @@ public class City_selector extends AppCompatActivity implements View.OnClickList
 
 
     private void inti() {
-
         // get all data from JSON
         if (list==null){
             list = new ArrayList<>();
@@ -97,10 +92,6 @@ public class City_selector extends AppCompatActivity implements View.OnClickList
     }
 
     private void setdata() {
-/*        City_model city_model = new City_model();
-        city_model.setCity_id("00");
-        city_model.setCity_name("All india");
-        list.add(0, city_model);*/
         String object = Utility.get_home(this);
         Log.d("dssdsd",object);
         try {
@@ -136,25 +127,15 @@ public class City_selector extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.get_location:
-                if(latitude!=0.0&&longitude!=0.0) {
-                    boolean is_get = true;
-                    for (int i = 0; i < list.size(); i++) {
-                        if (list.get(i).getCity_name().equalsIgnoreCase(Utility.get_city(this, latitude, longitude))) {
-                            Utility.setcity(this, list.get(i).getCity_name(), list.get(i).getCity_id());
-                            is_get = false;
-                            break;
-                        }
-                    }
-                    if (is_get) {
-                        Utility.setcity(this, "All India", "00");
-                    }
-                }
-                else
-                {
-                    Toast.makeText(getApplicationContext(),"Try  Again ",Toast.LENGTH_LONG).show();
-                }
+                GPSTracker gpsTracker = new GPSTracker(this);
+                double lat = gpsTracker.getLatitude();
+                double lng = gpsTracker.getLongitude();
+                Log.d("lat", String.valueOf(lat));
+                Log.d("lng", String.valueOf(lng));
+                Toast.makeText(this, "ohk",Toast.LENGTH_LONG).show();
                 break;
         }
     }
 
 }
+

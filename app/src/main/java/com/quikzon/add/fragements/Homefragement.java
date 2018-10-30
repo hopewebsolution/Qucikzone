@@ -122,6 +122,8 @@ public class Homefragement extends Fragment implements View.OnClickListener {
         LinkedHashMap<String, String> login_detail = new LinkedHashMap<>();
         login_detail.put("nearby_latitude", "");
         login_detail.put("nearby_longitude", "");
+        /*
+        login_detail.put("city_name", Utility.getcity(getActivity()));*/
         Request result = Utility.post(login_detail, Apiconfig.home);
         OkHttpClient okHttpClient = new OkHttpClient();
         okHttpClient.newCall(result).enqueue(new Callback() {

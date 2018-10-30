@@ -92,5 +92,6 @@
     <string name="delet">Delete</string>
     <string name="edit">Edit</string>
     <string name="prm">PREMIUM</string>
-    <string name="chat_user">chat_user</string>
+    <string name="oopss">Oops! Nothing that much specific</string>
+    <string name="oopss_des">We don\'t have ads with the filters you applied.</string>
 </resources>

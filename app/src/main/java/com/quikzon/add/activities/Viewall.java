@@ -62,10 +62,12 @@ public class Viewall extends AppCompatActivity implements View.OnClickListener,S
     RelativeLayout rel_main_header;
     @BindView(R.id.Ivback)
     ImageView Ivback;
-  /*  @BindView(R.id.Svview)
-    ScrollViewExt Svview;*/
+    @BindView(R.id.Lllayout)
+    LinearLayout Lllayout;
     @BindView(R.id.no_ads)
     TextView no_ads;
+  /*  @BindView(R.id.Svview)
+    ScrollViewExt Svview;*/
     String cat_id = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +90,7 @@ public class Viewall extends AppCompatActivity implements View.OnClickListener,S
                 list = Utility.gson.fromJson(sub_Cat, new TypeToken<List<Product_attrubuts>>() {
                 }.getType());
                 if(list.size()>0) {
-                    no_ads.setVisibility(View.GONE);
+                    Lllayout.setVisibility(View.GONE);
                     Rvviewall.setVisibility(View.VISIBLE);
                     Rvviewall.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
                     view_all_adpater = new VIew_all_adapter(this, list);
@@ -96,7 +98,7 @@ public class Viewall extends AppCompatActivity implements View.OnClickListener,S
                 }
                 else
                 {
-                    no_ads.setVisibility(View.VISIBLE);
+                    Lllayout.setVisibility(View.VISIBLE);
                     Rvviewall.setVisibility(View.GONE);
                 }
             } else {
@@ -126,6 +128,7 @@ public class Viewall extends AppCompatActivity implements View.OnClickListener,S
     private void callapi(String cat_id) {
         LinkedHashMap<String, String> login_detail = new LinkedHashMap<>();
         login_detail.put("ad_cats1", cat_id);
+        login_detail.put("city_name", Utility.getcity(this));
         Request result = Utility.post(login_detail, Apiconfig.add_post);
         OkHttpClient okHttpClient = new OkHttpClient();
         okHttpClient.newCall(result).enqueue(new Callback() {
@@ -159,8 +162,8 @@ public class Viewall extends AppCompatActivity implements View.OnClickListener,S
                             }
                             else
                             {
-                                no_ads.setVisibility(View.VISIBLE);
-                                no_ads.setText(R.string.no_ads);
+                                no_ads.setVisibility(View.GONE);
+                                Lllayout.setVisibility(View.VISIBLE);
                                 Rvviewall.setVisibility(View.GONE);
                             }
                         } catch (IOException e) {

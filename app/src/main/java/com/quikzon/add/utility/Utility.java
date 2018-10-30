@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.quikzon.add.Homeactivity;
 import com.quikzon.add.R;
@@ -54,6 +55,7 @@ import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
 import okhttp3.FormBody;
+import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -103,6 +105,7 @@ public class Utility {
             String value = (String) keys.get(key);
             body.add(key.toString(), value);
         }
+
         RequestBody parmetrs = body.build();
         Request request = new Request.Builder()
                 .addHeader("custom-security", Custom_Security)
@@ -111,6 +114,21 @@ public class Utility {
                 .build();
         return request;
     }
+    public static Request loginapi(String object, String apidata) {
+        StrictMode.ThreadPolicy policy =
+                new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        FormBody.Builder body = new FormBody.Builder();
+          body.add("user_login", object);
+        RequestBody parmetrs = body.build();
+        final Request request = new Request.Builder()
+                .addHeader("custom-security", Utility.Custom_Security)
+                .url(Apiconfig.url + apidata)
+                .post(parmetrs)
+                .build();
+        return request;
+    }
+
 /*    public static Request get(String api_name){
         StrictMode.ThreadPolicy policy =
                 new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -188,8 +206,6 @@ public class Utility {
         local_db = activity.getSharedPreferences(activity.getString(R.string.home_data), Context.MODE_PRIVATE);
         return local_db.getString(activity.getString(R.string.data), "");
     }
-
-
 
     // to save user remeber detail
 

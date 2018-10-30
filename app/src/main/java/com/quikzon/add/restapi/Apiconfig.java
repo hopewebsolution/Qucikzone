@@ -12,4 +12,5 @@ public interface Apiconfig {
     String addetails ="addetails/";
     String myads ="myads/";
     String delete_ad ="delete-ad/";
+    String checkuser ="checkuser/";
 }

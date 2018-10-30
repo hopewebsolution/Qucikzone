@@ -110,18 +110,16 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         ButterKnife.bind(this);
         init();
         setdata();
-
-
     }
 
     private void init() {
-        random = new Random();
+        continue_btn.setOnClickListener(this);
+      /*  random = new Random();
         continue_btn.setOnClickListener(this);
         Chk.setOnClickListener(this);
         Btnsendotp.setOnClickListener(this);
         Btnlogins.setOnClickListener(this);
         email.setHint("Enter Mobile Number/ Email");
-
 
         email.addTextChangedListener(new TextWatcher() {
             @Override
@@ -155,9 +153,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     Btnlogins.setVisibility(View.VISIBLE);
                 }
             }
-        });
+        });*/
     }
-
     private void setdata() {
         try {
             JSONObject obj = new JSONObject(Utility.get_home(this));
@@ -178,9 +175,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.continuesl:
-                //chkvalidation();
                 if (chkvalidation()) {
-                    Chk.setVisibility(View.GONE);
+                  /*  Chk.setVisibility(View.GONE);*/
+                    login();
                 }
                 break;
             case R.id.Chk:
@@ -198,7 +195,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 break;
             case R.id.Btnsendotp:
                 if (Utility.isValidMobile(email.getText().toString())) {
-                    Loginapi();
+                 //   Loginapi();
                 } else {
                     email.setEnabled(true);
                     chkvalidation();
@@ -216,7 +213,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     }
                 } else {
                     if (Utility.isValidMail(email.getText().toString()) && !Utility.is_empty(password.getText().toString()))
-                        Loginapi();
+                     /*   Loginapi();*/
+                     Log.d("d","dfs");
                     else
                         Utility.show_toast(Login.this, getString(R.string.wrong_detail));
                 }
@@ -235,14 +233,67 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         }
         return true;
     }
+    public  void login(){
+        mainprogress.setVisibility(View.VISIBLE);
+        Request request = Utility.loginapi(email.getText().toString(),Apiconfig.checkuser);
+        OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull final IOException e) {
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        mainprogress.setVisibility(View.GONE);
+                        Log.d("responsefailure",e.toString());
+                        email.setEnabled(true);
+                        password.setEnabled(true);
+                    }
+                });
+            }
 
-    @SuppressLint("NewApi")
+            @Override
+            public void onResponse(@NonNull Call call, final @NonNull Response response) throws
+                    IOException {
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        try {
+                            mainprogress.setVisibility(View.GONE);
+                            Log.d("ok","write");
+                            JSONObject object = new JSONObject(response.body().string());
+                            Log.d("ohk",new Gson().toJson(object).toString());
+                            if (object.getBoolean("success")) {
+                                Intent intent = new Intent(Login.this,Login_chk.class);
+                                intent.putExtra("data",object.getString("data"));
+                                startActivity(intent);
+                            }else{
+                                boolean digitsOnly = TextUtils.isDigitsOnly(email.getText().toString());
+                                Intent i = new Intent(Login.this, Register.class);
+                                if (digitsOnly) {
+                                    i.putExtra("mobile", email.getText().toString());
+                                    i.putExtra("email", "");
+                                } else {
+                                    i.putExtra("mobile", "");
+                                    i.putExtra("email", email.getText().toString());
+                                }
+                                startActivity(i);
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+ /*   @SuppressLint("NewApi")
     public void Loginapi() {
         mainprogress.setVisibility(View.VISIBLE);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         JsonObject object = new JsonObject();
-        object.addProperty("email", email.getText().toString());
-        object.addProperty("password", password.getText().toString());
+        object.addProperty("email", "radhe25shyam@gmail.com");
+        object.addProperty("password", "123456");
         if(is_mobile)
         {
             object.addProperty("mobile", email.getText().toString());
@@ -252,7 +303,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             object.addProperty("mobile", "");
 
         }
-
 
         email.setEnabled(false);
         password.setEnabled(false);
@@ -265,7 +315,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 .url(Apiconfig.url + Apiconfig.login)
                 .post(body)
                 .build();
+
         OkHttpClient okHttpClient = new OkHttpClient();
+
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull final IOException e) {
@@ -312,7 +364,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                                 }
 
                             } else if (object.getString("success").equalsIgnoreCase("0") && object.getString("is_registered").equalsIgnoreCase("0")) {
-
                                 Intent i = new Intent(Login.this, Register.class);
                                 if (is_mobile) {
                                     i.putExtra("mobile", email.getText().toString());
@@ -336,7 +387,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 });
             }
         });
-    }
+    }*/
 
 
     private void satrt_auto_acrolling() {
