@@ -70,6 +70,7 @@
     <string name="profie_desc">Need  to change profile detail click here...</string>
     <string name="bussines_type">Select Bussiness Type</string>
     <string name="wrong_detail"><![CDATA[Email & password Wrong]]></string>
+    <string name="wrong_detail_mobile"><![CDATA[Email &  password Wrong]]></string>
     <string name="required">All Filed Required !</string>
     <string name="wron_otp">Wrong OTP</string>
     <string name="desname">DESCRIPTION</string>
