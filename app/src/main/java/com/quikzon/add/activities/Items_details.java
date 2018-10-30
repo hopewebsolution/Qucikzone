@@ -24,8 +24,12 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.nkzawa.emitter.Emitter;
+import com.github.nkzawa.socketio.client.IO;
+import com.github.nkzawa.socketio.client.Socket;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.quikzon.add.Homeactivity;
 import com.quikzon.add.R;
 import com.quikzon.add.adapters.Homeparentcategoires;
 import com.quikzon.add.adapters.Item_description;
@@ -36,14 +40,17 @@ import com.quikzon.add.model.Chat_list;
 import com.quikzon.add.model.Item_descritiption;
 import com.quikzon.add.model.News_blog;
 import com.quikzon.add.model.Product_attrubuts;
+import com.quikzon.add.model.Typing;
 import com.quikzon.add.model.item_des_key;
 import com.quikzon.add.restapi.Apiconfig;
+import com.quikzon.add.restapi.User_details;
 import com.quikzon.add.utility.Utility;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -102,6 +109,7 @@ public class Items_details extends AppCompatActivity implements View.OnClickList
     String author_id = "";
     String author_type= "";
     String ad_title= "";
+    String room_id="";
     Sub_catgory sub_catgory;
     ArrayList<Product_attrubuts> smiler_ads=new ArrayList<>();
     /*   TextView no_ads;*/
@@ -113,6 +121,7 @@ public class Items_details extends AppCompatActivity implements View.OnClickList
     Gson gson;
     String all_imgs="";
     FragmentTransaction fragmentTransaction;
+    Socket socket;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -243,8 +252,7 @@ public class Items_details extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.Llchat:
                 if (Utility.get_login(this)) {
-                    //to add user
-                    ad_user(ad_id,author_id,author_name,ad_title);
+                        ad_user(ad_id, author_id, author_name, ad_title);
                 } else {
                     Intent i = new Intent(this, Login.class);
                     startActivityForResult(i, Utility.login);
@@ -253,7 +261,8 @@ public class Items_details extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private void ad_user(String ad_id,String author_id,String author_name,String ad_title) {
+    private void ad_user(String ad_id, final String author_id, String author_name, String ad_title) {
+        Homeactivity homeactivity=new Homeactivity();
         ArrayList<Chat_list> user=Utility.get_chat_user(this);
         if(user!=null)
         {
@@ -272,22 +281,20 @@ public class Items_details extends AppCompatActivity implements View.OnClickList
                 chat_list.setAuthor_id(author_id);
                 chat_list.setAuthor_name(author_name);
                 chat_list.setAd_title(ad_title);
+                chat_list.setRoom_id(String.valueOf(userid+author_id+ad_id));
                 user.add(chat_list);
                 Utility.set_chat_user(this,gson.toJson(user));
-                start_fragment(new Chat_user());
 
             }
-            else
-            {
-                Chat_list chat_list=new Chat_list();
-                chat_list.setAd_id(ad_id);
-                chat_list.setAuthor_id(author_id);
-                chat_list.setAuthor_name(author_name);
-                chat_list.setAd_title(ad_title);
-                user.add(chat_list);
-                Utility.set_chat_user(this,gson.toJson(user));
-                start_fragment(new Chat_user());
-            }
+            Intent intent=new Intent(this,Messagner.class);
+            intent.putExtra("author_id",author_id);
+            intent.putExtra("ad_id",ad_id);
+            intent.putExtra("author_name",author_name);
+            intent.putExtra("ad_title",ad_title);
+            intent.putExtra("room_id",String.valueOf(userid+author_id+ad_id));
+            startActivity(intent);
+
+
         }
         else
         {
@@ -297,17 +304,19 @@ public class Items_details extends AppCompatActivity implements View.OnClickList
             chat_list.setAuthor_id(author_id);
             chat_list.setAuthor_name(author_name);
             chat_list.setAd_title(ad_title);
+            chat_list.setRoom_id(String.valueOf(userid+author_id+ad_id));
             user.add(chat_list);
             Utility.set_chat_user(this,gson.toJson(user));
-            start_fragment(new Chat_user());
+
+            Intent intent=new Intent(this,Messagner.class);
+            intent.putExtra("author_id",author_id);
+            intent.putExtra("ad_id",ad_id);
+            intent.putExtra("author_name",author_name);
+            intent.putExtra("ad_title",ad_title);
+            intent.putExtra("room_id",String.valueOf(userid+author_id+ad_id));
+            startActivity(intent);
         }
 
     }
 
-    private void start_fragment(Fragment fragment)
-    {
-        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, fragment);
-        fragmentTransaction.commit();
-    }
 }

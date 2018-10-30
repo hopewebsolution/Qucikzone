@@ -6,6 +6,16 @@ public class ChatMessage {
     private String body, sender, receiver;
     private boolean isMine;
     private String date;
+    private String ad_id;
+    private String room_id;
+
+    public String getRoom_id() {
+        return room_id;
+    }
+
+    public void setRoom_id(String room_id) {
+        this.room_id = room_id;
+    }
 
     public boolean isMine() {
         return isMine;
@@ -45,5 +55,13 @@ public class ChatMessage {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getAd_id() {
+        return ad_id;
+    }
+
+    public void setAd_id(String ad_id) {
+        this.ad_id = ad_id;
     }
 }

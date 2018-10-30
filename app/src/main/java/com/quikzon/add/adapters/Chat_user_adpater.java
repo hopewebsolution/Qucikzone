@@ -40,7 +40,13 @@ public class Chat_user_adpater extends RecyclerView.Adapter<RecyclerView.ViewHol
         ((MyViewHolder)viewHolder).itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context,Messagner.class));
+                Intent intent=new Intent(context,Messagner.class);
+                intent.putExtra("author_id",chat_user.get(position).getAuthor_id());
+                intent.putExtra("ad_id",chat_user.get(position).getAd_id());
+                intent.putExtra("author_name",chat_user.get(position).getAuthor_name());
+                intent.putExtra("ad_title",chat_user.get(position).getAd_title());
+                intent.putExtra("room_id",chat_user.get(position).getRoom_id());
+                context.startActivity(intent);
             }
         });
 

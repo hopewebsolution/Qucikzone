@@ -33,7 +33,9 @@ import com.google.gson.reflect.TypeToken;
 import com.quikzon.add.Homeactivity;
 import com.quikzon.add.R;
 import com.quikzon.add.model.Account_model;
+import com.quikzon.add.model.ChatMessage;
 import com.quikzon.add.model.Chat_list;
+import com.quikzon.add.model.Group_chat;
 import com.quikzon.add.model.Super_cat;
 import com.quikzon.add.restapi.Apiconfig;
 import com.squareup.picasso.Picasso;
@@ -437,13 +439,32 @@ public class Utility {
         tbl_user.apply();
     }
 
+    public static boolean get_chat_user_by_room(Activity activity,String room_id) {
+        local_db = activity.getSharedPreferences(activity.getString(R.string.chat_user), Context.MODE_PRIVATE);
+       ArrayList<Chat_list> lists= Utility.gson.fromJson(local_db.getString("chat_list",""), new TypeToken<List<Chat_list>>() {
+        }.getType());
+        if (lists != null) {
+            for (Chat_list chat_list : lists) {
+                if (chat_list.getRoom_id().equalsIgnoreCase(room_id)) {
+                    return true;
+                }
+            }
+        }
+       return false;
+    }
+
+
+
+
     public static ArrayList<Chat_list> get_chat_user(Activity activity) {
         local_db = activity.getSharedPreferences(activity.getString(R.string.chat_user), Context.MODE_PRIVATE);
         return Utility.gson.fromJson(local_db.getString("chat_list",""), new TypeToken<List<Chat_list>>() {
         }.getType());
     }
 
-    public static void join_chat(Activity activity,String name)
+
+
+    public static Socket join_chat(Activity activity,String name)
     {
         //connect you socket client to the server
         try {
@@ -453,6 +474,68 @@ public class Utility {
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
+        return socket;
     }
+
+    public static void save_chat(Activity activity, String sen,String auhot,String ad_id, String chat) {
+        local_db = activity.getSharedPreferences(activity.getString(R.string.chat_user), Context.MODE_PRIVATE);
+        tbl_user = local_db.edit();
+        ArrayList<Group_chat> all_chats = Utility.gson.fromJson(local_db.getString("chat", ""), new TypeToken<List<Group_chat>>() {
+        }.getType());
+
+        if(all_chats!=null) {
+            boolean is_chat = false;
+            int pos = 0;
+            for (Group_chat chatMessage : all_chats) {
+                if (chatMessage!=null&&chatMessage.getSender_id().equalsIgnoreCase(sen)&&chatMessage.getAuthor_id().equalsIgnoreCase(auhot)&&chatMessage.getAd_id().equalsIgnoreCase(ad_id)) {
+                    is_chat = true;
+                    break;
+                }
+                pos++;
+            }
+            Group_chat group_chat=new Group_chat();
+            group_chat.setAd_id(ad_id);
+            group_chat.setSender_id(sen);
+            group_chat.setAuthor_id(auhot);
+            group_chat.setChats(chat);
+            if (is_chat) {
+                all_chats.set(pos, group_chat);
+            } else {
+
+                all_chats.add(group_chat);
+
+            }
+        }
+        else {
+            Group_chat group_chat=new Group_chat();
+            group_chat.setAd_id(ad_id);
+            group_chat.setSender_id(sen);
+            group_chat.setAuthor_id(auhot);
+            group_chat.setChats(chat);
+            all_chats=new ArrayList<>();
+            all_chats.add(group_chat);
+        }
+        tbl_user.putString("chat", Utility.gson.toJson(all_chats));
+        tbl_user.apply();
+    }
+
+    public static ArrayList<ChatMessage> get_chat(Activity activity,String sen,String aut, String ad_id) {
+        ArrayList<ChatMessage> current_ad_chat = new ArrayList<>();
+        local_db = activity.getSharedPreferences(activity.getString(R.string.chat_user), Context.MODE_PRIVATE);
+        ArrayList<Group_chat> all_chats = Utility.gson.fromJson(local_db.getString("chat", ""), new TypeToken<List<Group_chat>>() {
+        }.getType());
+        if(all_chats!=null) {
+            int i=0;
+            for (Group_chat chatMessage : all_chats) {
+                if (chatMessage!=null&&chatMessage.getSender_id().equalsIgnoreCase(sen)&&chatMessage.getAuthor_id().equalsIgnoreCase(aut)&&chatMessage.getAd_id().equalsIgnoreCase(ad_id)) {
+                    current_ad_chat= Utility.gson.fromJson(chatMessage.getChats(), new TypeToken<List<ChatMessage>>() {}.getType());
+                    break;
+                }
+            }
+        }
+        return current_ad_chat;
+    }
+
+
 
 }

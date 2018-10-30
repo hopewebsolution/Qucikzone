@@ -1,7 +1,15 @@
 package com.quikzon.add.model;
 
 public class Chat_list {
-    String ad_id,author_id,author_name,ad_title;
+    String ad_id,author_id,author_name,ad_title,room_id;
+
+    public String getRoom_id() {
+        return room_id;
+    }
+
+    public void setRoom_id(String room_id) {
+        this.room_id = room_id;
+    }
 
     public String getAd_id() {
         return ad_id;

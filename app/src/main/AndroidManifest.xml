@@ -116,9 +116,11 @@
         <activity
             android:name=".activities.Full_screen_img"
             android:configChanges="orientation|screenSize"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan|adjustResize"/>
+        <activity android:name=".activities.Messagner"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.Chat_user" />
-        <activity android:name=".activities.Messagner"></activity>
     </application>
 
 </manifest>

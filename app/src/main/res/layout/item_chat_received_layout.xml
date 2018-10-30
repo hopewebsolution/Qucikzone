@@ -14,7 +14,8 @@
         android:orientation="vertical"
         android:background="@drawable/ic_received_message"
         android:layout_toEndOf="@id/profile_image"
-        android:paddingBottom="5dp">
+        android:paddingBottom="5dp"
+        android:layout_toRightOf="@id/profile_image">
 
         <TextView
             android:id="@+id/message"
@@ -24,7 +25,9 @@
             android:layout_marginTop="5dp"
             android:layout_marginStart="30dp"
             android:textColor="#000000"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="30dp" />
 
         <TextView
             android:id="@+id/tv_date"
@@ -32,9 +35,10 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="10dp"
             android:textColor="#7d7d7d"
-            android:textSize="10sp" />
+            android:textSize="10sp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="30dp" />
     </LinearLayout>
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -46,5 +50,6 @@
         android:layout_alignParentStart="true"
         android:src="@drawable/profileimg"
         app:civ_border_color="#FFdddddd"
-        app:civ_border_width="1px" />
+        app:civ_border_width="1px"
+        android:layout_alignParentLeft="true" />
 </RelativeLayout>
