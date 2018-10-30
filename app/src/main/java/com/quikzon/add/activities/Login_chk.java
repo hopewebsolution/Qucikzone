@@ -122,6 +122,7 @@ public class Login_chk extends AppCompatActivity implements View.OnClickListener
                         Toast.makeText(this,"not correct details",Toast.LENGTH_LONG).show();*/
                         /*
                         Utility.show_toast(Login_chk.this, getString(R.string.wrong_detail));*/
+
                     }
                     }
                 break;
@@ -195,8 +196,7 @@ public class Login_chk extends AppCompatActivity implements View.OnClickListener
             }
 
             @Override
-            public void onResponse(@NonNull Call call, final @NonNull Response response) throws
-                    IOException {
+            public void onResponse(@NonNull Call call, final @NonNull Response response) {
                 runOnUiThread(new Runnable() {
                     public void run() {
                         try {
