@@ -1,5 +1,6 @@
 package com.quikzon.add.utility;
 import android.os.StrictMode;
+import android.security.NetworkSecurityPolicy;
 import android.util.Log;
 import android.widget.ProgressBar;
 
