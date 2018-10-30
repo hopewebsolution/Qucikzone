@@ -9,6 +9,7 @@
         android:id="@+id/rel_main_header"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:visibility="gone"
         android:gravity="left|start">
         <ImageView
             android:id="@+id/menu_icon"

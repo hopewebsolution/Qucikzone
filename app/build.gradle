@@ -47,7 +47,8 @@ dependencies {
     compile('com.github.nkzawa:socket.io-client:0.5.0') {
         exclude group: 'org.json', module: 'json'
     }
-
+    //noinspection GradleCompatible
+    implementation 'com.google.firebase:firebase-messaging:17.3.4'
     // dexter runtime permissions
     implementation 'id.zelory:compressor:2.1.0'
     implementation 'com.android.support:multidex:1.0.3'
@@ -57,3 +58,4 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
+//apply plugin: 'com.google.gms.google-services'

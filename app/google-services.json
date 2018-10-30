@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "612622630192",
+    "firebase_url": "https://quikzonapp.firebaseio.com",
+    "project_id": "quikzonapp",
+    "storage_bucket": "quikzonapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:612622630192:android:566044d4ea47c16f",
+        "android_client_info": {
+          "package_name": "com.quikzon.add"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "612622630192-lgc5dha8rrmhk4qg5hht2dmdc1cph4pl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYpEYsZF2q8qZ7fZ6FuDGhaAO7WVTm-UU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

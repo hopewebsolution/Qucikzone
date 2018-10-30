@@ -138,9 +138,10 @@ public class Post_add extends AppCompatActivity implements View.OnClickListener 
             address_edt.setText(getIntent().getStringExtra("adress"));
             name.setText(getIntent().getStringExtra("name"));
             phone.setText(getIntent().getStringExtra("mobile"));
-            if (edit_img != null) {
                 edit_img = Utility.gson.fromJson(getIntent().getStringExtra("imgs"), new TypeToken<List<Adimg_model>>() {
                 }.getType());
+            if (edit_img != null) {
+
                 for (int i = 0; i < edit_img.size(); i++) {
                     Post_imgs imgs = new Post_imgs();
                     imgs.setIs_system(false);
@@ -154,7 +155,6 @@ public class Post_add extends AppCompatActivity implements View.OnClickListener 
                 btn_post.setText("Edit Post");
             }
         }
-        left_icon.setImageResource(R.drawable.ic_chevron_left_black_24dp);
 /*        center_icon.setText(R.string.post);
         right_icon.setText(R.string.resetall);*/
         Tvsubcat.setText(Addpost_fragement.sub_cat_name);
@@ -202,8 +202,7 @@ public class Post_add extends AppCompatActivity implements View.OnClickListener 
             }
 
             @Override
-            public void onResponse(@NonNull Call call, final @NonNull Response response) throws
-                    IOException {
+            public void onResponse(@NonNull Call call, final @NonNull Response response) {
                 runOnUiThread(new Runnable() {
                     public void run() {
                         try {
@@ -383,15 +382,14 @@ public class Post_add extends AppCompatActivity implements View.OnClickListener 
             }
 
             @Override
-            public void onResponse(@NonNull Call call, final @NonNull Response response) throws
-                    IOException {
+            public void onResponse(@NonNull Call call, final @NonNull Response response) {
                 runOnUiThread(new Runnable() {
                     public void run() {
                         if (response.isSuccessful()) {
                             try {
                                 progress.setVisibility(View.GONE);
                                 JSONObject object = new JSONObject(response.body().string());
-                                Log.d("post", new Gson().toJson(object).toString());
+                                Log.d("post", new Gson().toJson(object));
                                 Log.d("allpost", String.valueOf(object));
                                 Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_LONG).show();
                                 if (object.getBoolean("success")) {
@@ -438,8 +436,7 @@ public class Post_add extends AppCompatActivity implements View.OnClickListener 
             }
 
             @Override
-            public void onResponse(@NonNull Call call, final @NonNull Response response) throws
-                    IOException {
+            public void onResponse(@NonNull Call call, final @NonNull Response response) {
                 runOnUiThread(new Runnable() {
                     public void run() {
                         if (response.isSuccessful()) {
