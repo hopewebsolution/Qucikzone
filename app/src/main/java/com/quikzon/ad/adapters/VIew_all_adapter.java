@@ -32,15 +32,11 @@ import java.util.ArrayList;
 public class VIew_all_adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
     ArrayList<Product_attrubuts> personNames;
     Context context;
-    OnBottomReachedListener onBottomReachedListener;
     public VIew_all_adapter(Context context, ArrayList<Product_attrubuts> personNames) {
         this.context = context;
         this.personNames = personNames;
     }
-    public void setOnBottomReachedListener(OnBottomReachedListener onBottomReachedListener){
 
-        this.onBottomReachedListener = onBottomReachedListener;
-    }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -56,12 +52,6 @@ public class VIew_all_adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         ((MyViewHolder)viewHolder).Tvdescription.setText(personNames.get(position).getAd_title());
         if(personNames.get(position).getIs_feature()) {
             ((MyViewHolder)viewHolder).Tvtxtfiled.setVisibility(View.VISIBLE);
-        }
-
-        if (position == personNames.size() - 1){
-
-            onBottomReachedListener.onBottomReached(position);
-
         }
 //      ((MyViewHolder)viewHolder).Tvcondition.setText(personNames.get(position).getAd_cats_name());
         ((MyViewHolder)viewHolder).Tvaddress.setText(personNames.get(position).getAd_location().get(0).getAddress());

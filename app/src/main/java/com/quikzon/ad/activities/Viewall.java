@@ -6,7 +6,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,6 +27,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -62,7 +65,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class Viewall extends AppCompatActivity implements View.OnClickListener,ScrollViewListener {
+public class Viewall extends AppCompatActivity implements View.OnClickListener, ScrollViewListener {
     Sub_catgory_adpater sub_catgory_adpater;
     ArrayList<Product_attrubuts> list = new ArrayList<>();
     VIew_all_adapter view_all_adpater;
@@ -86,13 +89,14 @@ public class Viewall extends AppCompatActivity implements View.OnClickListener,S
     LinearLayout footer;
     @BindView(R.id.progress)
     ProgressBar progress;
-  /*  @BindView(R.id.Svview)
-    ScrollViewExt Svview;*/
+    /*  @BindView(R.id.Svview)
+      ScrollViewExt Svview;*/
     String cat_id = "";
-    String sort_by="";
-    String city_name="";
-    int  page=1;
-    boolean has_next_page=true;
+    String sort_by = "";
+    String city_name = "";
+    int page = 1;
+    boolean has_next_page = true;
+    int last_size=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,22 +112,20 @@ public class Viewall extends AppCompatActivity implements View.OnClickListener,S
         rel_extra_header.setVisibility(View.VISIBLE);
         Ivback.setOnClickListener(this);
         if (!Utility.getcity(this).equalsIgnoreCase("All India")) {
-            city_name=Utility.getcity(this);
+            city_name = Utility.getcity(this);
         }
         if (getIntent() != null) {
             String sub_Cat = getIntent().getStringExtra("sub_Cat");
             if (sub_Cat != null) {
                 list = Utility.gson.fromJson(sub_Cat, new TypeToken<List<Product_attrubuts>>() {
                 }.getType());
-                if(list.size()>0) {
+                if (list.size() > 0) {
                     Lllayout.setVisibility(View.GONE);
                     Rvviewall.setVisibility(View.VISIBLE);
                     Rvviewall.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
                     view_all_adpater = new VIew_all_adapter(this, list);
                     Rvviewall.setAdapter(view_all_adpater);
-                }
-                else
-                {
+                } else {
                     Rvviewall.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
                     view_all_adpater = new VIew_all_adapter(this, list);
                     Rvviewall.setAdapter(view_all_adpater);
@@ -151,19 +153,22 @@ public class Viewall extends AppCompatActivity implements View.OnClickListener,S
         }
         Llfilter.setOnClickListener(this);
         Llsort.setOnClickListener(this);
-        if(view_all_adpater!=null) {
-            view_all_adpater.setOnBottomReachedListener(new OnBottomReachedListener() {
-                @Override
-                public void onBottomReached(int position) {
+        Rvviewall.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                if (!recyclerView.canScrollVertically(1)) {
                     if (has_next_page) {
                         page++;
                         callapi(cat_id);
                     }
-                }
-            });
-        }
 
+                }
+            }
+        });
     }
+
     public void callapi(String cat_id) {
         progress.setVisibility(View.VISIBLE);
         LinkedHashMap<String, String> login_detail = new LinkedHashMap<>();
@@ -171,24 +176,17 @@ public class Viewall extends AppCompatActivity implements View.OnClickListener,S
         login_detail.put("nearby_latitude", String.valueOf(LocationService.lat));
         login_detail.put("nearby_longitude", String.valueOf(LocationService.lng));
         login_detail.put("page_number", String.valueOf(page));
-        if(sort_by.equalsIgnoreCase("low_to_hight")) {
+        if (sort_by.equalsIgnoreCase("low_to_hight")) {
             login_detail.put("sort_by", "price");
             login_detail.put("order", "asc");
-        }
-        else if(sort_by.equalsIgnoreCase("hight_to_to"))
-        {
+        } else if (sort_by.equalsIgnoreCase("hight_to_to")) {
             login_detail.put("sort_by", "price");
             login_detail.put("order", "desc");
-        }
-        else if(sort_by.equalsIgnoreCase("recent_poset"))
-        {
+        } else if (sort_by.equalsIgnoreCase("recent_poset")) {
 
             login_detail.put("sort_by", "");
             login_detail.put("order", "");
-        }
-
-        else if(sort_by.equalsIgnoreCase("nearby"))
-        {
+        } else if (sort_by.equalsIgnoreCase("nearby")) {
             login_detail.put("sort_by", "nearby");
             login_detail.put("order", "desc");
         }
@@ -217,29 +215,24 @@ public class Viewall extends AppCompatActivity implements View.OnClickListener,S
                         try {
                             progress.setVisibility(View.GONE);
                             JSONObject obj = new JSONObject(response.body().string());
-                            has_next_page=obj.getBoolean("has_next_page");
-                            if(list.size()>0) {
-                                JSONArray array=obj.getJSONObject("data").getJSONArray("ads");
-                                for(int i=0;i<array.length();i++)
-                                {
-                                    JSONObject object=array.getJSONObject(i);
-                                    Product_attrubuts product_attrubuts=Utility.gson.fromJson(object.toString(),Product_attrubuts.class);
-                                    list.add(product_attrubuts);
+                            has_next_page = obj.getBoolean("has_next_page");
+                            if (list.size() > 0) {
+                                ArrayList<Product_attrubuts> temp_list = Utility.gson.fromJson(obj.getJSONObject("data").getJSONArray("ads").toString(), new TypeToken<List<Product_attrubuts>>() {
+                                }.getType());
+                                for (int i = 0; i < temp_list.size(); i++) {
+                                    list.add(temp_list.get(i));
                                 }
 
-                            }
-                            else {
+                            } else {
                                 list = Utility.gson.fromJson(obj.getJSONObject("data").getJSONArray("ads").toString(), new TypeToken<List<Product_attrubuts>>() {
                                 }.getType());
                             }
-                            if(list.size()>0) {
+                            if (list.size() > 0) {
                                 Rvviewall.setVisibility(View.VISIBLE);
                                 Rvviewall.setLayoutManager(new LinearLayoutManager(Viewall.this, LinearLayoutManager.VERTICAL, false));
                                 view_all_adpater = new VIew_all_adapter(Viewall.this, list);
                                 Rvviewall.setAdapter(view_all_adpater);
-                            }
-                            else
-                            {
+                            } else {
                                 no_ads.setVisibility(View.GONE);
                                 Lllayout.setVisibility(View.VISIBLE);
                                 Rvviewall.setVisibility(View.GONE);
@@ -267,64 +260,65 @@ public class Viewall extends AppCompatActivity implements View.OnClickListener,S
                 break;
         }
     }
+
     @Override
     public void onScrollChanged(ScrollViewExt scrollView, int x, int y, int oldx, int oldy) {
 
     }
+
     public void showCustomDialog() {
         final Dialog dialog = new Dialog(this);
-        LayoutInflater layoutInflater=(LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         assert layoutInflater != null;
-        View view=layoutInflater.inflate(R.layout.activity_sort, null);
+        View view = layoutInflater.inflate(R.layout.activity_sort, null);
         dialog.setContentView(view);
         final Window window = dialog.getWindow();
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         window.setBackgroundDrawableResource(R.drawable.button_border_tranfranet);
         window.setGravity(Gravity.CENTER);
         dialog.setCancelable(false);
-        RelativeLayout Rvclose=(RelativeLayout)view.findViewById(R.id.Rvclose);
+        RelativeLayout Rvclose = (RelativeLayout) view.findViewById(R.id.Rvclose);
         Rvclose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(dialog.isShowing())
-                {
+                if (dialog.isShowing()) {
                     dialog.dismiss();
                 }
             }
         });
-        TextView higlow=(TextView)view.findViewById(R.id.higlow);
+        TextView higlow = (TextView) view.findViewById(R.id.higlow);
         higlow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sort_by="hight_to_to";
+                sort_by = "hight_to_to";
                 dialog.dismiss();
                 callapi(cat_id);
             }
         });
-        TextView nearby=(TextView)view.findViewById(R.id.nearby);
+        TextView nearby = (TextView) view.findViewById(R.id.nearby);
         nearby.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sort_by="nearby";
+                sort_by = "nearby";
                 dialog.dismiss();
                 callapi(cat_id);
             }
         });
 
-        TextView recent_post=(TextView)view.findViewById(R.id.recent_post);
+        TextView recent_post = (TextView) view.findViewById(R.id.recent_post);
         recent_post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sort_by="";
+                sort_by = "";
                 dialog.dismiss();
                 callapi(cat_id);
             }
         });
-        TextView lowhigh=(TextView)view.findViewById(R.id.lowhigh);
+        TextView lowhigh = (TextView) view.findViewById(R.id.lowhigh);
         lowhigh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sort_by="low_to_hight";
+                sort_by = "low_to_hight";
                 dialog.dismiss();
                 callapi(cat_id);
             }
