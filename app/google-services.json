@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "612622630192",
-    "firebase_url": "https://quikzonapp.firebaseio.com",
-    "project_id": "quikzonapp",
-    "storage_bucket": "quikzonapp.appspot.com"
+    "project_number": "460975328104",
+    "firebase_url": "https://quickzonmap.firebaseio.com",
+    "project_id": "quickzonmap",
+    "storage_bucket": "quickzonmap.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:612622630192:android:566044d4ea47c16f",
+        "mobilesdk_app_id": "1:460975328104:android:05c9352ba18a8982",
         "android_client_info": {
-          "package_name": "com.quikzon.add"
+          "package_name": "com.quikzon.ad"
         }
       },
       "oauth_client": [
         {
-          "client_id": "612622630192-lgc5dha8rrmhk4qg5hht2dmdc1cph4pl.apps.googleusercontent.com",
+          "client_id": "460975328104-el8fiio3erqm9tt3ph9chab6f9vflt3f.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCYpEYsZF2q8qZ7fZ6FuDGhaAO7WVTm-UU"
+          "current_key": "AIzaSyBy_NljBVI2Tph2OgDeZbhxyR3eco5bfrE"
         }
       ],
       "services": {

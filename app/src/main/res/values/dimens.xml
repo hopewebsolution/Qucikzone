@@ -13,5 +13,6 @@
     <dimen name="eight_dp">8dp</dimen>
     <dimen name="fourty_dp">40dp</dimen>
     <dimen name="fifty_dp">55dp</dimen>
+    <dimen name="sixty_dp">65dp</dimen>
     <dimen name="one_thirty_dp">130dp</dimen>
 </resources>

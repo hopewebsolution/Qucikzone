@@ -61,14 +61,14 @@
                 app:srcCompat="@drawable/ic_edit"/>
         </LinearLayout>-->
     </LinearLayout>
-    <com.quikzon.add.helper.NonScrollListview
+    <com.quikzon.ad.helper.NonScrollListview
         android:id="@+id/Lvlist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/ten_dp"
         android:scrollbars="none"
         android:divider="@android:color/transparent">
-    </com.quikzon.add.helper.NonScrollListview>
+    </com.quikzon.ad.helper.NonScrollListview>
       <Button
           android:id="@+id/Btnupdate"
           android:layout_width="match_parent"

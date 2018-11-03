@@ -6,6 +6,7 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="api_key">AIzaSyC3R1NsNeDNgumsOCgseNE9ChN0EsRgy3s</string>
     //Facebook login appids
     <string name="facebook_app_id">294918424445981</string>
     <string name="fb_login_protocol_scheme">fb294918424445981</string>
@@ -78,7 +79,7 @@
     <string name="ADDETAILS">AD DETAILS</string>
     <string name="sellerdetails">SELLER DETAILS</string>
     <string name="ct_qc">Contact with Quickzon chat</string>
-    <string name="makeoffchat"><![CDATA[Make offer & chat]]></string>
+    <string name="makeoffchat">Chat</string>
     <string name="min_add">Minmium one image required for post add</string>
     <array name="bussiness_type">
         <item>Business Type</item>
@@ -96,4 +97,6 @@
     <string name="oopss">Oops! Nothing that much specific</string>
     <string name="oopss_des">We don\'t have ads with the filters you applied.</string>
     <string name="chat_user">chat_user</string>
+    <string name="wait_msg">please Wait till load data</string>
+    <string name="invalid">Wrong Address type</string>
 </resources>

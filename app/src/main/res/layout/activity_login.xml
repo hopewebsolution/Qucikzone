@@ -59,17 +59,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/ten_dp"
                 android:layout_marginRight="@dimen/ten_dp"
+                android:hint="Enter Email/Mobile"
+                android:textColorHint="@color/colorblack"
                 android:layout_marginTop="@dimen/ten_dp">
-
                 <EditText
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="actionNext"
                     android:inputType="text"
-                    android:textColor="@color/colorblack" />
+                    style="@style/InputDialogText"/>
             </android.support.design.widget.TextInputLayout>
-
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/password_wrapper"
                 android:layout_width="match_parent"

@@ -164,7 +164,7 @@
                     android:padding="@dimen/five_dp"
                     android:text="@string/ADDETAILS" />
 
-                <com.quikzon.add.helper.NonScrollListview
+                <com.quikzon.ad.helper.NonScrollListview
                     android:id="@+id/Listview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

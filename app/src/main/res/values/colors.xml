@@ -22,4 +22,5 @@
     <color name="colormainbg">#f4f4f4</color>
     <color name="recyclerborder">#ceced0</color>
     <color name="white_greyish">#a0a0a0</color>
+    <color name="color_transprent">#00FFFFFF</color>
 </resources>

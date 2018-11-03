@@ -1,0 +1,51 @@
+package com.quikzon.ad.adapters;
+
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v4.view.PagerAdapter;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.quikzon.ad.R;
+import com.quikzon.ad.model.Slider;
+import com.quikzon.ad.utility.Utility;
+
+import java.util.ArrayList;
+
+public class VIewpager extends PagerAdapter {
+    private ArrayList<Slider> images;
+    private LayoutInflater inflater;
+    private Context context;
+
+    public VIewpager(Context context, ArrayList<Slider> images) {
+        this.context = context;
+        this.images=images;
+        inflater = LayoutInflater.from(context);
+    }
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        container.removeView((View) object);
+    }
+
+    @Override
+    public int getCount() {
+        return images.size();
+    }
+
+    @Override
+    public Object instantiateItem(ViewGroup view, int position) {
+        View myImageLayout = inflater.inflate(R.layout.slider, view, false);
+        ImageView imags = (ImageView) myImageLayout
+                .findViewById(R.id.image);
+        Utility.Set_image(images.get(position).getImage(),imags);
+        view.addView(myImageLayout, 0);
+        return myImageLayout;
+    }
+    @Override
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
+        return view.equals(object);
+    }
+}

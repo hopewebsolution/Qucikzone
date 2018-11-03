@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colormainbg"
     android:orientation="vertical">
-    <include layout="@layout/layoot_header"/>
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
+        android:visibility="gone"
+        android:layout_centerInParent="true"/>
+    <include layout="@layout/layoot_header" android:id="@+id/heh"/>
     <ScrollView
         android:id="@+id/Svview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_below="@+id/heh">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -17,16 +27,8 @@
         android:id="@+id/Rvviewall"
         android:overScrollMode="never"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"/>
-    <TextView
-        android:id="@+id/no_ads"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="16sp"
-        android:text="@string/no_ads"
-        android:gravity="center"
-        android:visibility="gone"/>
+        android:layout_height="wrap_content"
+        android:visibility="visible"/>
         <LinearLayout
             android:id="@+id/Lllayout"
             android:layout_width="match_parent"
@@ -57,6 +59,79 @@
                 android:textColor="@color/colordarkgray"
                 android:text="@string/oopss_des"/>
         </LinearLayout>
+            <TextView
+                android:id="@+id/no_ads"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="16sp"
+                android:layout_marginTop="200dp"
+                android:gravity="center"
+                android:text="@string/no_ads"
+                android:visibility="gone"/>
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/footer"
+        android:background="@drawable/button_border_sort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="25dp"
+        android:layout_marginLeft="85dp"
+        android:layout_marginRight="85dp"
+        android:weightSum="1"
+        android:orientation="horizontal" >
+        <LinearLayout
+            android:id="@+id/Llsort"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.50"
+            android:layout_margin="@dimen/five_dp"
+            android:weightSum="1"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/ten_dp"
+                android:layout_weight="0.20"
+                app:srcCompat="@drawable/ic_sort_black_24dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sort"
+                android:layout_weight="0.80"
+                android:textColor="@color/colorwhite"
+                android:textSize="14sp" />
+        </LinearLayout>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/colorwhite"/>
+        <LinearLayout
+            android:id="@+id/Llfilter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.50"
+            android:layout_margin="@dimen/five_dp"
+            android:weightSum="1"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/ten_dp"
+                android:layout_weight="0.20"
+                app:srcCompat="@drawable/ic_favorite_border_black_24dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Favorite"
+                android:layout_weight="0.80"
+                android:textColor="@color/colorwhite"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

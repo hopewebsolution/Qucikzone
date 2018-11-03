@@ -9,9 +9,11 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
+        android:id="@+id/card_view1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
+        android:clickable="true"
         app:cardElevation="3dp">
         <LinearLayout
             android:id="@+id/Llitems"
@@ -20,14 +22,15 @@
             android:orientation="vertical">
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/one_thirty_dp"
+                android:layout_height="130dp"
                 android:duplicateParentState="true"
                 android:gravity="center">
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/img_scroll"
-                    android:overScrollMode="never"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/one_thirty_dp"
+                    android:layout_height="130dp"
+                    android:layout_gravity="center"
                     android:background="@color/colorwhite"/>
                 <TextView
                     android:id="@+id/Tvtxtfiled"
